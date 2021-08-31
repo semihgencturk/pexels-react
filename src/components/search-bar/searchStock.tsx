@@ -8,7 +8,7 @@ function searchStock(search: string): Promise<any[]> {
     }),
   })
     .then((r) => r.json())
-    .then((r) => r.images)
+    .then((r) => r.photos)
     .catch((error) => {
       console.error(error);
       return [];
