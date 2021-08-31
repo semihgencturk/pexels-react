@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './components/pages/Home';
+import Discover from './components/pages/Discover';
+import Videos from './components/pages/Videos';
+import Leaderboard from './components/pages/Leaderboard';
+import Challenges from './components/pages/Challenges';
 
 function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
-    );
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/discover' component={Discover} />
+          <Route path='/videos' component={Videos} />
+          <Route path='/leaderboard' component={Leaderboard} />
+          <Route path='/challenges' component={Challenges} />
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
