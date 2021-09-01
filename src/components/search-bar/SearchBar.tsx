@@ -7,8 +7,7 @@ import RecentSearchesItem from './expended-part-items/RecentSearchesItem';
 import CollectionsItem from './expended-part-items/CollectionsItem';
 import TrendingTopicsItem from './expended-part-items/TrendingTopicsItem';
 import '../../App.css';
-import { useSetImages } from '../../context/AppContext';
-import { useSetIsSearching } from '../../context/AppContext';
+import { useSetImages, useSetIsSearching } from '../../context/AppContext';
 
 interface Props {
   placeHolder: string;

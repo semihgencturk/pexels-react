@@ -58,7 +58,7 @@ export const useSetIsSearching = (): ((payload: boolean) => void) => {
   const dispatch = useContext(AppDispatchContext);
 
   if (dispatch === undefined) {
-    throw new Error('useSetImages must be used within a AppProvider');
+    throw new Error('useSetIsSearching must be used within a AppProvider');
   }
 
   return (payload: boolean) =>
