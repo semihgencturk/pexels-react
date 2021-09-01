@@ -55,93 +55,95 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
   }, [debouncedSearchTerm]);
 
   return (
-    <div
-      className={isExpended ? 'expanded-search-bar' : 'collapsed-search-bar'}
-      ref={clickOutsideHandleRef}
-    >
-      <div className='search-bar-input-container'>
-        <input
-          type='text'
-          className='search-bar-input-text'
-          placeholder={placeHolder}
-          onClick={() => setIsExpended(true)}
-          value={searchTerm}
-          onChange={(event: React.FormEvent<HTMLInputElement>) =>
-            setSearchTerm((event.target as HTMLInputElement).value)
-          }
-        />
-        <div className='search-bar-search-icon-container'>
-          <IoSearch
+    <div className='search-bar-container'>
+      <div
+        className={isExpended ? 'expanded-search-bar' : 'collapsed-search-bar'}
+        ref={clickOutsideHandleRef}
+      >
+        <div className='search-bar-input-container'>
+          <input
+            type='text'
+            className='search-bar-input-text'
+            placeholder={placeHolder}
             onClick={() => setIsExpended(true)}
-            className='search-bar-search-icon'
+            value={searchTerm}
+            onChange={(event: React.FormEvent<HTMLInputElement>) =>
+              setSearchTerm((event.target as HTMLInputElement).value)
+            }
           />
-        </div>
-      </div>
-      {isExpended && (
-        <div className='search-bar-expended-part-container'>
-          {isRecentSearch && (
-            <div>
-              <div className='search-bar-recent-searches'>
-                <div className='search-bar-recent-searches-title'>
-                  <span>Recent searches</span>
-                  <button className='search-bar-recent-searches-title-icon-container'>
-                    <IoCloseCircleSharp className='search-bar-recent-searches-title-icon' />
-                  </button>
-                </div>
-                <div className='search-bar-recent-searches-items-container'>
-                  {isExpended && (
-                    <ul className='search-bar-recent-searches-list'>
-                      {recentSearches.map((recentSearch, key) => (
-                        <RecentSearchesItem title={recentSearch} key={key} />
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-              <div className='search-bar-collections'>
-                <div className='search-bar-collections-title'>
-                  <span>Collections</span>
-                </div>
-                <div className='search-bar-collections-items-container'>
-                  {isExpended && (
-                    <ul className='search-bar-collections-list'>
-                      {collections.map((collection, key) => (
-                        <CollectionsItem
-                          title={collection}
-                          subtitle='179 photos'
-                          source='https://images.pexels.com/photos/633198/pexels-photo-633198.jpeg?auto=compress&cs=tinysrgb&fit=crop&fp-y=0.6&h=500&sharp=15&w=1400'
-                          alt='TODO'
-                          key={key}
-                        />
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div className='search-bar-trending-topics'>
-            <div className='search-bar-trending-topics-title'>
-              <span>Trending Topics</span>
-            </div>
-            <div className='search-bar-trending-topics-items-container'>
-              {isExpended && (
-                <ul className='search-bar-trending-topics-list'>
-                  {trendingTopics.map((trendingTopic, key) => (
-                    <TrendingTopicsItem
-                      title={trendingTopic}
-                      source='https://images.pexels.com/photos/633198/pexels-photo-633198.jpeg?auto=compress&cs=tinysrgb&fit=crop&fp-y=0.6&h=500&sharp=15&w=1400'
-                      alt='TODO'
-                      key={key}
-                    />
-                  ))}
-                </ul>
-              )}
-            </div>
+          <div className='search-bar-search-icon-container'>
+            <IoSearch
+              onClick={() => setIsExpended(true)}
+              className='search-bar-search-icon'
+            />
           </div>
         </div>
-      )}
+        {isExpended && (
+          <div className='search-bar-expended-part-container'>
+            {isRecentSearch && (
+              <div>
+                <div className='search-bar-recent-searches'>
+                  <div className='search-bar-recent-searches-title'>
+                    <span>Recent searches</span>
+                    <button className='search-bar-recent-searches-title-icon-container'>
+                      <IoCloseCircleSharp className='search-bar-recent-searches-title-icon' />
+                    </button>
+                  </div>
+                  <div className='search-bar-recent-searches-items-container'>
+                    {isExpended && (
+                      <ul className='search-bar-recent-searches-list'>
+                        {recentSearches.map((recentSearch, key) => (
+                          <RecentSearchesItem title={recentSearch} key={key} />
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+                <div className='search-bar-collections'>
+                  <div className='search-bar-collections-title'>
+                    <span>Collections</span>
+                  </div>
+                  <div className='search-bar-collections-items-container'>
+                    {isExpended && (
+                      <ul className='search-bar-collections-list'>
+                        {collections.map((collection, key) => (
+                          <CollectionsItem
+                            title={collection}
+                            subtitle='179 photos'
+                            source='https://images.pexels.com/photos/633198/pexels-photo-633198.jpeg?auto=compress&cs=tinysrgb&fit=crop&fp-y=0.6&h=500&sharp=15&w=1400'
+                            alt='TODO'
+                            key={key}
+                          />
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className='search-bar-trending-topics'>
+              <div className='search-bar-trending-topics-title'>
+                <span>Trending Topics</span>
+              </div>
+              <div className='search-bar-trending-topics-items-container'>
+                {isExpended && (
+                  <ul className='search-bar-trending-topics-list'>
+                    {trendingTopics.map((trendingTopic, key) => (
+                      <TrendingTopicsItem
+                        title={trendingTopic}
+                        source='https://images.pexels.com/photos/633198/pexels-photo-633198.jpeg?auto=compress&cs=tinysrgb&fit=crop&fp-y=0.6&h=500&sharp=15&w=1400'
+                        alt='TODO'
+                        key={key}
+                      />
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

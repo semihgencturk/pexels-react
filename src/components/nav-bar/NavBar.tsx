@@ -25,7 +25,9 @@ const NavBar = () => {
     >
       <div className='nav-bar-left-side'>
         <Logo />
-        {mainNavBar && <SearchBar placeHolder='Search for free photos' />}
+        <div className='nav-bar-search-bar-container'>
+          {mainNavBar && <SearchBar placeHolder='Search for free photos' />}
+        </div>
       </div>
       <div className='nav-bar-right-side'>
         <Explore />
