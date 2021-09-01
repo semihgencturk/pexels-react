@@ -42,8 +42,10 @@ const Header = () => {
             The best free stock photos & videos shared by talented creators.
           </span>
         </div>
-        <div className='header-search-bar-container'>
-          <SearchBar placeHolder='Search for free photos and videos' />
+        <div className='header-search-bar-and-suggested-container'>
+          <div className='header-search-bar-container'>
+            <SearchBar placeHolder='Search for free photos and videos' />
+          </div>
           <div className='header-search-bar-container-search-tags-items-container'>
             <li>Suggested: </li>
             <li>

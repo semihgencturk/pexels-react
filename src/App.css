@@ -117,7 +117,7 @@
   width: 100%;
   margin-right: 2.15rem;
   border-radius: 6px;
-  min-height: 22px;
+  height: 100%;
   position: absolute;
 }
 
@@ -900,8 +900,19 @@
   color: #fff;
 }
 
-.header-search-bar-container {
+.header-search-bar-and-suggested-container {
   display: block;
+}
+
+.header-search-bar-container {
+  margin-top: 1.15rem;
+  max-width: 750px;
+  width: 100%;
+  margin-right: 2.15rem;
+  border-radius: 6px;
+  min-height: 66px;
+  position: relative; 
+  margin-bottom: 0;
 }
 
 .header-search-bar-container-search-tags-items-container {
