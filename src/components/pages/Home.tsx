@@ -6,14 +6,14 @@ import NavBar from '../nav-bar/NavBar';
 import { useAppState } from '../../context/AppContext';
 
 const Home = () => {
-  const { images } = useAppState();
+  const { images, isSearching } = useAppState();
 
   return (
     <div>
       <NavBar />
       <Header />
       <TabsBar />
-      <Gallery images={images || []} />
+      <Gallery images={images || []} isSearching={isSearching} />
     </div>
   );
 };

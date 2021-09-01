@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 interface GalleryProps {
   images: any[];
+  isSearching: boolean;
 }
 
-const Gallery: FC<GalleryProps> = ({ images }) => {
+const Gallery: FC<GalleryProps> = ({ images, isSearching }) => {
   return (
     <div className='gallery'>
       <div className='gallery-top-section'>
@@ -29,17 +31,23 @@ const Gallery: FC<GalleryProps> = ({ images }) => {
           </div>
         </div>
       </div>
-      <div className='gallery-photos'>
-        {images.map((image, index) => (
-          <img
-            key={index}
-            alt={image.photographer}
-            src={image.src.original}
-            width='100%'
-            height='100%'
-          />
-        ))}
-      </div>
+      {isSearching ? (
+        <div className='gallery-loader-icon-container'>
+          <MoonLoader loading color='#000' size='40' />
+        </div>
+      ) : (
+        <div className='gallery-photos'>
+          {images.map((image, index) => (
+            <img
+              key={index}
+              alt={image.photographer}
+              src={image.src.original}
+              width='100%'
+              height='100%'
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
