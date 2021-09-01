@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const Gallery = () => {
+interface GalleryProps {
+  images: any[];
+}
+
+const Gallery: FC<GalleryProps> = ({ images }) => {
   return (
     <div className='gallery'>
       <div className='gallery-top-section'>
@@ -26,7 +30,15 @@ const Gallery = () => {
         </div>
       </div>
       <div className='gallery-photos'>
-        {/* PHOTOS SHOULD BE SHOWED IN HERE */}
+        {images.map((image, index) => (
+          <img
+            key={index}
+            alt={image.photographer}
+            src={image.src.original}
+            width='100%'
+            height='100%'
+          />
+        ))}
       </div>
     </div>
   );

@@ -47,9 +47,8 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
     if (debouncedSearchTerm) {
       searchStock(debouncedSearchTerm).then((results) => {
         setImages(results);
+        setIsExpended(false);
       });
-    } else {
-      setImages([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm]);
