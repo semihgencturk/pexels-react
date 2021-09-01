@@ -7,13 +7,14 @@ import { useAppState } from '../../context/AppContext';
 
 const Home = () => {
   const { images } = useAppState();
+  const { isSearching } = useAppState();
 
   return (
     <div>
       <NavBar />
       <Header />
       <TabsBar />
-      <Gallery images={images || []} />
+      <Gallery images={images || []} isSearching={isSearching} />
     </div>
   );
 };

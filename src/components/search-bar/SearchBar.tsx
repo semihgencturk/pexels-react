@@ -8,6 +8,7 @@ import CollectionsItem from './expended-part-items/CollectionsItem';
 import TrendingTopicsItem from './expended-part-items/TrendingTopicsItem';
 import '../../App.css';
 import { useSetImages } from '../../context/AppContext';
+import { useSetIsSearching } from '../../context/AppContext';
 
 interface Props {
   placeHolder: string;
@@ -16,6 +17,7 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
   const [isExpended, setIsExpended] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const setImages = useSetImages();
+  const setIsSearching = useSetIsSearching();
   const [clickOutsideHandleRef, isClickedOutside] = useClickOutside();
   const [isRecentSearch, setIsRecentSearch] = useState<boolean>(true);
   const debouncedSearchTerm: string = useDebounce<string>(searchTerm, 500);
@@ -45,9 +47,11 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
 
   useEffect(() => {
     if (debouncedSearchTerm) {
+      setIsSearching(true);
       searchStock(debouncedSearchTerm).then((results) => {
         setImages(results);
         setIsExpended(false);
+        setIsSearching(false);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -4,6 +4,7 @@ import { Action, AppState, ACTIONS } from './types';
 
 const initialValues = {
   images: [],
+  isSearching: false,
 };
 
 type AppDispatch = (action: Action) => void;
@@ -15,6 +16,8 @@ const AppReducer = (state: AppState, action: Action): AppState => {
   switch (action.type) {
     case ACTIONS.SET_IMAGES:
       return { ...state, images: action.payload };
+    case ACTIONS.SET_IS_SEARCHING:
+      return { ...state, isSearching: action.payload };
     default:
       return state;
   }
@@ -49,6 +52,17 @@ export const useSetImages = (): ((payload: any[]) => void) => {
 
   return (payload: any[]) =>
     dispatch({ type: ACTIONS.SET_IMAGES, payload: payload });
+};
+
+export const useSetIsSearching = (): ((payload: boolean) => void) => {
+  const dispatch = useContext(AppDispatchContext);
+
+  if (dispatch === undefined) {
+    throw new Error('useSetImages must be used within a AppProvider');
+  }
+
+  return (payload: boolean) =>
+    dispatch({ type: ACTIONS.SET_IS_SEARCHING, payload: payload });
 };
 
 export default AppProvider;

@@ -1035,6 +1035,11 @@
   margin-left: 6rem;
 }
 
+.gallery-top-section-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .gallery-title {
   display: block;
   font-size: 18px;
@@ -1042,6 +1047,12 @@
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.gallery-loader-icon-container {
+   width: 20px;
+   height: 20px;
+   margin-right: 0.5rem;
 }
 
 .gallery-menu-container {
