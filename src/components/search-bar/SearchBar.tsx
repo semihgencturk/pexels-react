@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import { IoSearch, IoCloseCircleSharp } from 'react-icons/io5';
 import { useClickOutside } from 'react-click-outside-hook';
 import useDebounce from './useDebounce';
-import searchStock from './searchStock';
+import searchStock from '../../api/searchStock';
 import RecentSearchesItem from './expended-part-items/RecentSearchesItem';
 // import CollectionsItem from './expended-part-items/CollectionsItem';
 // import TrendingTopicsItem from './expended-part-items/TrendingTopicsItem';
@@ -21,13 +21,14 @@ interface Props {
 const SearchBar: FC<Props> = ({ placeHolder }) => {
   const [isExpended, setIsExpended] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [clickOutsideHandleRef, isClickedOutside] = useClickOutside();
+  const [isRecentSearch, setIsRecentSearch] = useState<boolean>(true);
+
   const setImages = useSetImages();
   const setIsSearching = useSetIsSearching();
   const setRecentSearches = useSetRecentSearches();
-  const [clickOutsideHandleRef, isClickedOutside] = useClickOutside();
-  const [isRecentSearch, setIsRecentSearch] = useState<boolean>(true);
-  const debouncedSearchTerm: string = useDebounce<string>(searchTerm, 500);
 
+  const debouncedSearchTerm: string = useDebounce<string>(searchTerm, 500);
   const { recentSearches } = useAppState();
 
   // const recentSearches: string[] = ['Code', 'Nature', 'Hiking', 'Sea'];

@@ -13,9 +13,8 @@ const Gallery: FC<GalleryProps> = ({ images, isSearching }) => {
         <div className='gallery-title'>
           <span>Free Stock Photos</span>
         </div>
-        <div className='gallery-menu-container'>
+        {/* <div className='gallery-menu-container'>
           <div className='galley-menu'>
-            {/* GALLERY DROPDOWN MENU SHOULD BE SHOWED IN HERE */}
             <button className='gallery-menu-dropdown-title'>Trending</button>
             <i className='gallery-menu-dropdown-icon-container'>
               <svg
@@ -29,7 +28,7 @@ const Gallery: FC<GalleryProps> = ({ images, isSearching }) => {
               </svg>
             </i>
           </div>
-        </div>
+        </div> */}
       </div>
       {isSearching ? (
         <div className='gallery-loader-icon-container'>
