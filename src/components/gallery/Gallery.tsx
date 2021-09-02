@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 interface GalleryProps {
@@ -41,7 +41,7 @@ const Gallery: FC<GalleryProps> = ({ images, isSearching }) => {
             <img
               key={index}
               alt={image.photographer}
-              src={image.src.original}
+              src={image.src.tiny}
               width='100%'
               height='100%'
             />
