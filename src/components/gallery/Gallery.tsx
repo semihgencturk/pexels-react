@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import MoonLoader from 'react-spinners/MoonLoader';
+import getCuratedImages from './getCuratedImages';
+import { useSetImages } from '../../context/AppContext';
 
 interface GalleryProps {
   images: any[];
@@ -7,6 +9,14 @@ interface GalleryProps {
 }
 
 const Gallery: FC<GalleryProps> = ({ images, isSearching }) => {
+  const setImages = useSetImages();
+
+  useEffect(() => {
+    getCuratedImages().then((results) => {
+      setImages(results);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className='gallery'>
       <div className='gallery-top-section'>
@@ -41,7 +51,7 @@ const Gallery: FC<GalleryProps> = ({ images, isSearching }) => {
             <img
               key={index}
               alt={image.photographer}
-              src={image.src.original}
+              src={image.src.tiny}
               width='100%'
               height='100%'
             />
