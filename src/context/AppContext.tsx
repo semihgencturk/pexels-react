@@ -12,6 +12,7 @@ import { Action, AppState, ACTIONS } from './types';
 const initialValues = {
   images: [],
   isSearching: false,
+  recentSearches: [],
 };
 
 type AppDispatch = (action: Action) => void;
@@ -25,6 +26,8 @@ const AppReducer = (state: AppState, action: Action): AppState => {
       return { ...state, images: action.payload };
     case ACTIONS.SET_IS_SEARCHING:
       return { ...state, isSearching: action.payload };
+    case ACTIONS.SET_RECENT_SEARCHES:
+      return { ...state, recentSearches: action.payload };
     default:
       return state;
   }
@@ -38,6 +41,13 @@ const AppProvider: FC = ({ children }) => {
       dispatch({ type: ACTIONS.SET_IMAGES, payload: results });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    dispatch({
+      type: ACTIONS.SET_RECENT_SEARCHES,
+      payload: JSON.parse(localStorage.getItem('recentSearches') || ''),
+    });
   }, []);
 
   return (
@@ -79,4 +89,14 @@ export const useSetIsSearching = (): ((payload: boolean) => void) => {
     dispatch({ type: ACTIONS.SET_IS_SEARCHING, payload: payload });
 };
 
+export const useSetRecentSearches = (): ((payload: string[]) => void) => {
+  const dispatch = useContext(AppDispatchContext);
+
+  if (dispatch === undefined) {
+    throw new Error('useSetRecentSearches must be used within a AppProvider');
+  }
+
+  return (payload: string[]) =>
+    dispatch({ type: ACTIONS.SET_RECENT_SEARCHES, payload: payload });
+};
 export default AppProvider;
