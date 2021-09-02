@@ -8,6 +8,7 @@ import CollectionsItem from './expended-part-items/CollectionsItem';
 import TrendingTopicsItem from './expended-part-items/TrendingTopicsItem';
 import '../../App.css';
 import { useSetImages, useSetIsSearching } from '../../context/AppContext';
+import scrollToGallery from './scrollToGallery';
 
 interface Props {
   placeHolder: string;
@@ -47,10 +48,11 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
   useEffect(() => {
     if (debouncedSearchTerm) {
       setIsSearching(true);
+      setIsExpended(false);
       searchStock(debouncedSearchTerm).then((results) => {
         setImages(results);
-        setIsExpended(false);
         setIsSearching(false);
+        scrollToGallery();
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
