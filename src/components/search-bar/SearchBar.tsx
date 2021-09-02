@@ -61,14 +61,16 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
         setImages(results);
         setIsSearching(false);
         scrollToGallery();
-        if (recentSearches.length > 4) {
-          recentSearches.shift();
+        if (recentSearches.includes(debouncedSearchTerm) !== true) {
+          if (recentSearches.length > 4) {
+            recentSearches.shift();
+          }
+          setRecentSearches([...recentSearches, debouncedSearchTerm]);
+          localStorage.setItem(
+            'recentSearches',
+            JSON.stringify([...recentSearches, debouncedSearchTerm])
+          );
         }
-        setRecentSearches([...recentSearches, debouncedSearchTerm]);
-        localStorage.setItem(
-          'recentSearches',
-          JSON.stringify([...recentSearches, debouncedSearchTerm])
-        );
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
