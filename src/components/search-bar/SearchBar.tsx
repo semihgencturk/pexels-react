@@ -4,10 +4,15 @@ import { useClickOutside } from 'react-click-outside-hook';
 import useDebounce from './useDebounce';
 import searchStock from './searchStock';
 import RecentSearchesItem from './expended-part-items/RecentSearchesItem';
-import CollectionsItem from './expended-part-items/CollectionsItem';
-import TrendingTopicsItem from './expended-part-items/TrendingTopicsItem';
+// import CollectionsItem from './expended-part-items/CollectionsItem';
+// import TrendingTopicsItem from './expended-part-items/TrendingTopicsItem';
 import '../../App.css';
-import { useSetImages, useSetIsSearching } from '../../context/AppContext';
+import {
+  useAppState,
+  useSetImages,
+  useSetIsSearching,
+  useSetRecentSearches,
+} from '../../context/AppContext';
 import scrollToGallery from './scrollToGallery';
 
 interface Props {
@@ -18,20 +23,23 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const setImages = useSetImages();
   const setIsSearching = useSetIsSearching();
+  const setRecentSearches = useSetRecentSearches();
   const [clickOutsideHandleRef, isClickedOutside] = useClickOutside();
   const [isRecentSearch, setIsRecentSearch] = useState<boolean>(true);
   const debouncedSearchTerm: string = useDebounce<string>(searchTerm, 500);
 
-  const recentSearches: string[] = ['Code', 'Nature', 'Hiking', 'Sea'];
-  const collections: string[] = ['Istanbul', 'Forest', 'Volleyball', 'Cide'];
-  const trendingTopics: string[] = [
-    'Setur',
-    'Travel',
-    'React',
-    'Frontend',
-    'Van Life',
-    'Camp',
-  ];
+  const { recentSearches } = useAppState();
+
+  // const recentSearches: string[] = ['Code', 'Nature', 'Hiking', 'Sea'];
+  // const collections: string[] = ['Istanbul', 'Forest', 'Volleyball', 'Cide'];
+  // const trendingTopics: string[] = [
+  //   'Setur',
+  //   'Travel',
+  //   'React',
+  //   'Frontend',
+  //   'Van Life',
+  //   'Camp',
+  // ];
 
   useEffect(() => {
     if (isClickedOutside) setIsExpended(false);
@@ -53,10 +61,20 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
         setImages(results);
         setIsSearching(false);
         scrollToGallery();
+        if (recentSearches.length > 4) {
+          recentSearches.shift();
+        }
+        setRecentSearches([...recentSearches, debouncedSearchTerm]);
+        localStorage.setItem(
+          'recentSearches',
+          JSON.stringify([...recentSearches, debouncedSearchTerm])
+        );
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm]);
+
+  console.log(localStorage.getItem('recentSearches'));
 
   return (
     <div className='search-bar-container'>
@@ -103,7 +121,9 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
                     )}
                   </div>
                 </div>
-                <div className='search-bar-collections'>
+              </div>
+            )}
+            {/* <div className='search-bar-collections'>
                   <div className='search-bar-collections-title'>
                     <span>Collections</span>
                   </div>
@@ -122,11 +142,8 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
                       </ul>
                     )}
                   </div>
-                </div>
-              </div>
-            )}
-
-            <div className='search-bar-trending-topics'>
+                </div> */}
+            {/* <div className='search-bar-trending-topics'>
               <div className='search-bar-trending-topics-title'>
                 <span>Trending Topics</span>
               </div>
@@ -144,7 +161,7 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
                   </ul>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
