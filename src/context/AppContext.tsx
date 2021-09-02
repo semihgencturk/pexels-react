@@ -1,4 +1,11 @@
-import React, { FC, useContext, createContext, useReducer } from 'react';
+import React, {
+  FC,
+  useContext,
+  createContext,
+  useReducer,
+  useEffect,
+} from 'react';
+import getCuratedImages from '../api/getCuratedImages';
 
 import { Action, AppState, ACTIONS } from './types';
 
@@ -25,6 +32,13 @@ const AppReducer = (state: AppState, action: Action): AppState => {
 
 const AppProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialValues);
+
+  useEffect(() => {
+    getCuratedImages().then((results) => {
+      dispatch({ type: ACTIONS.SET_IMAGES, payload: results });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AppStateContext.Provider value={state}>
