@@ -6,6 +6,7 @@ import React, {
   useEffect,
 } from 'react';
 import getCuratedImages from '../api/getCuratedImages';
+import getHeaderBackgroundImage from '../api/getHeaderBackgroundImage';
 
 import { Action, AppState, ACTIONS } from './types';
 
@@ -13,6 +14,7 @@ const initialValues = {
   images: [],
   isSearching: false,
   recentSearches: [],
+  headerBackgroundImage: [],
 };
 
 type AppDispatch = (action: Action) => void;
@@ -28,6 +30,8 @@ const AppReducer = (state: AppState, action: Action): AppState => {
       return { ...state, isSearching: action.payload };
     case ACTIONS.SET_RECENT_SEARCHES:
       return { ...state, recentSearches: action.payload };
+    case ACTIONS.SET_HEADER_BACKGROUND_IMAGE:
+      return { ...state, headerBackgroundImage: action.payload };
     default:
       return state;
   }
@@ -47,6 +51,12 @@ const AppProvider: FC = ({ children }) => {
     dispatch({
       type: ACTIONS.SET_RECENT_SEARCHES,
       payload: JSON.parse(localStorage.getItem('recentSearches') || ''),
+    });
+  }, []);
+
+  useEffect(() => {
+    getHeaderBackgroundImage().then((results) => {
+      dispatch({ type: ACTIONS.SET_HEADER_BACKGROUND_IMAGE, payload: results });
     });
   }, []);
 

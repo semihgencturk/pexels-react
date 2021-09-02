@@ -1,7 +1,8 @@
-function searchStock(search: string): Promise<any[]> {
+function getHeaderBackgroundImage(): Promise<any[]> {
+  const search: string = 'sky';
   const apiKey: string =
     '563492ad6f91700001000001a780e996c46543c4aaa1b447d96c7bd5';
-  return fetch(`https://api.pexels.com/v1/search?query=${search}&per_page=18`, {
+  return fetch(`https://api.pexels.com/v1/search?query=${search}&per_page=1`, {
     method: 'GET',
     headers: new Headers({
       Authorization: `Bearer ${apiKey}`,
@@ -14,4 +15,4 @@ function searchStock(search: string): Promise<any[]> {
       return [];
     });
 }
-export default searchStock;
+export default getHeaderBackgroundImage;

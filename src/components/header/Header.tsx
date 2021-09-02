@@ -1,39 +1,40 @@
-import React from 'react';
+import React, { FC } from 'react';
 import SearchBar from '../search-bar/SearchBar';
 import '../../App.css';
-import SuggestedTag from './SuggestedTag';
+// import SuggestedTag from './SuggestedTag';
 
-function getRandomInt(min: number, max: number) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+interface HeaderProps {
+  background: any[];
 }
 
-const Header = () => {
-  const headerBackgroundImagesSources: string[] = [
-    'https://images.pexels.com/photos/5859220/pexels-photo-5859220.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;fp-y=0.52&amp;h=500&amp;sharp=20&amp;w=350 350w',
-  ];
+const Header: FC<HeaderProps> = ({ background }) => {
+  //   const suggestedTagsItems: string[] = [
+  //     'setur',
+  //     'react',
+  //     'travel',
+  //     'cide',
+  //     'more',
+  //   ];
 
-  const index: number = getRandomInt(0, 0);
-  const suggestedTagsItems: string[] = [
-    'setur',
-    'react',
-    'travel',
-    'cide',
-    'more',
-  ];
   return (
     <div className='header-container'>
       <div className='header-background-container'>
-        <img
-          className='header-background-image'
-          src={headerBackgroundImagesSources[index]}
-          alt='background'
-        />
+        {background.map((backgroundImage, index) => (
+          <img
+            className='header-background-image'
+            key={index}
+            src={backgroundImage.src.original}
+            alt={backgroundImage.photographer}
+          />
+        ))}
       </div>
       <div className='header-footer'>
         <div className='hide-when-smaller-848'>
-          <button className='header-footer-text'>Photo by Taryn Elliot</button>
+          {background.map((backgroundImage, index) => (
+            <button key={index} className='header-footer-text'>
+              Photo by <span>{backgroundImage.photographer}</span>
+            </button>
+          ))}
         </div>
       </div>
       <section className='header-content'>
@@ -46,7 +47,7 @@ const Header = () => {
           <div className='header-search-bar-container'>
             <SearchBar placeHolder='Search for free photos and videos' />
           </div>
-          <div className='header-search-bar-container-search-tags-items-container'>
+          {/* <div className='header-search-bar-container-search-tags-items-container'>
             <li>Suggested: </li>
             <li>
               <ul className='header-search-bar-container-search-tags-items'>
@@ -59,7 +60,7 @@ const Header = () => {
                 ))}
               </ul>
             </li>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
