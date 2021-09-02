@@ -1,6 +1,6 @@
 function getCuratedImages(): Promise<any[]> {
   const apiKey: string =
-    '563492ad6f91700001000001280cef2af0e144eabfab3185be7121ca';
+    '563492ad6f91700001000001f3a8889e446a484e9635719a6d52dbe9';
   return fetch(`https://api.pexels.com/v1/curated?per_page=18`, {
     method: 'GET',
     headers: new Headers({
