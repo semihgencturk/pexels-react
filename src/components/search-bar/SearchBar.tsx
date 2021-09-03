@@ -79,6 +79,10 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
 
   console.log(localStorage.getItem('recentSearches'));
 
+  const deleteRecentSearches = () => {
+    setRecentSearches([]);
+  };
+
   return (
     <div className='search-bar-container'>
       <div
@@ -110,7 +114,10 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
                 <div className='search-bar-recent-searches'>
                   <div className='search-bar-recent-searches-title'>
                     <span>Recent searches</span>
-                    <button className='search-bar-recent-searches-title-icon-container'>
+                    <button
+                      onClick={deleteRecentSearches}
+                      className='search-bar-recent-searches-title-icon-container'
+                    >
                       <IoCloseCircleSharp className='search-bar-recent-searches-title-icon' />
                     </button>
                   </div>

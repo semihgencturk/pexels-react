@@ -1123,6 +1123,13 @@
   .gallery-photos {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+
+  .gallery-top-section {
+    margin-right: 2rem;
+    margin-left: 2rem;
   }
 }
 
