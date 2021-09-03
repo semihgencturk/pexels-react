@@ -32,7 +32,7 @@ const Gallery: FC<GalleryProps> = ({ images, isSearching }) => {
       </div>
       {isSearching ? (
         <div className='gallery-loader-icon-container'>
-          <MoonLoader loading color='#000' size='40' />
+          <MoonLoader loading color='#000' size='40px' />
         </div>
       ) : (
         <div className='gallery-photos'>

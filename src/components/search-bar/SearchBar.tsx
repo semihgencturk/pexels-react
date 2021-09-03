@@ -77,8 +77,6 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm]);
 
-  console.log(localStorage.getItem('recentSearches'));
-
   const deleteRecentSearches = () => {
     setRecentSearches([]);
     localStorage.setItem('recentSearches', JSON.stringify([]));
