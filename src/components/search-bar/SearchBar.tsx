@@ -81,6 +81,7 @@ const SearchBar: FC<Props> = ({ placeHolder }) => {
 
   const deleteRecentSearches = () => {
     setRecentSearches([]);
+    localStorage.setItem('recentSearches', JSON.stringify([]));
   };
 
   return (
